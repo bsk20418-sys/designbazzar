@@ -1,0 +1,746 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: 'Kanit', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Kanit', sans-serif;
+  }
+
+  body {
+    font-family: 'Kanit', sans-serif;
+    background-color: #0C0C0C;
+    color: #D7E2EA;
+    overflow-x: clip;
+  }
+}
+
+/* Custom metallic gradient text utility */
+.metallic-text {
+  background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.metallic-text-bright {
+  background: linear-gradient(180deg, #8A92A0 0%, #E2EDF5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom button gradient as requested: linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%) */
+.contact-btn-gradient {
+  background: linear-gradient(123deg, #18011F 7%, #B600A8 37%, #7621B0 72%, #BE4C00 100%);
+  box-shadow: 0px 4px 12px rgba(181, 1, 167, 0.35), inset 0px 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+.contact-btn-gradient:hover {
+  box-shadow: 0px 6px 20px rgba(190, 76, 0, 0.4), 0px 0px 25px rgba(182, 0, 168, 0.35), inset 0px 1px 3px rgba(255, 255, 255, 0.6);
+}
+
+/* Reusable outline effect: white 2px outline with -3px offset */
+.contact-btn-outline {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: -3px;
+}
+
+/* Noise texture overlay for high-end studio feel */
+.bg-noise {
+  background-image: radial-gradient(rgba(215, 226, 234, 0.05) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Hide scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+
+/* Infinite creative showcase */
+@keyframes creative-marquee-left {
+  from { transform: translate3d(0,0,0); }
+  to { transform: translate3d(-50%,0,0); }
+}
+@keyframes creative-marquee-right {
+  from { transform: translate3d(-50%,0,0); }
+  to { transform: translate3d(0,0,0); }
+}
+.creative-marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+  will-change: transform;
+}
+@media (min-width: 640px) {
+  .creative-marquee-track { gap: 1rem; }
+}
+.creative-marquee-left { animation: creative-marquee-left 140s linear infinite; }
+.creative-marquee-right { animation: creative-marquee-right 152s linear infinite; }
+.creative-marquee-track:hover { animation-play-state: paused; }
+
+.social-glass-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.22);
+  background: linear-gradient(145deg, rgba(255,255,255,.16), rgba(229,83,2,.18));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 12px 28px rgba(0,0,0,.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 999px;
+  transform-style: preserve-3d;
+}
+.social-glass-icon:hover {
+  border-color: rgba(229,83,2,.75);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 14px 34px rgba(229,83,2,.2);
+}
+
+
+/* Hero title: text-only orange glass/gloss hover + a single left-to-right sweep. */
+.hero-title-sweep {
+  display: inline-block;
+  max-width: min(1100px, 94vw);
+  text-wrap: balance;
+  transition: color .25s ease, text-shadow .35s ease, filter .35s ease;
+  position: relative;
+}
+.hero-title-sweep:hover {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(90deg, #E55302 0%, #E55302 38%, #FFF4EA 50%, #E55302 62%, #E55302 100%);
+  background-size: 260% 100%;
+  background-position: 100% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow: 0 0 18px rgba(229,83,2,.16), 0 0 34px rgba(229,83,2,.08);
+  filter: drop-shadow(0 8px 22px rgba(229,83,2,.10));
+  animation: hero-title-gloss-sweep 1.15s cubic-bezier(.22,.61,.36,1) forwards;
+}
+@keyframes hero-title-gloss-sweep {
+  0% { background-position: 100% 50%; }
+  72% { background-position: 18% 50%; }
+  100% { background-position: -12% 50%; }
+}
+
+/* Comfortable touch targets and compact hero typography on phones. */
+@media (max-width: 639px) {
+  .hero-title-sweep {
+    max-width: 94vw;
+    line-height: .96;
+  }
+  .creative-marquee-track { gap: .5rem; }
+}
+
+/* Mobile hero cleanup: keep the portfolio cards visible without stacking them over the title. */
+@media (max-width: 639px) {
+  .hero-studio {
+    height: 300px !important;
+    margin-top: 0.25rem;
+  }
+  .hero-core-board {
+    display: none !important;
+  }
+  .hero-design-card {
+    width: 30% !important;
+    padding: 0.35rem !important;
+    border-radius: 0.8rem !important;
+    top: 22px !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+  }
+  .hero-design-card-1 { left: 0% !important; transform: rotate(-3deg) !important; }
+  .hero-design-card-2 { left: 35% !important; transform: rotate(1deg) !important; }
+  .hero-design-card-3 { left: 70% !important; transform: rotate(3deg) !important; }
+  .hero-design-card .relative.h-24,
+  .hero-design-card .sm\:h-32 { height: 82px !important; }
+  .hero-design-card .mt-2 { margin-top: 0.35rem !important; }
+  .hero-design-card .text-xs { font-size: 0.52rem !important; line-height: 1.1 !important; }
+  .hero-design-card span { font-size: 0.42rem !important; }
+  .hero-design-card-1:hover,
+  .hero-design-card-2:hover,
+  .hero-design-card-3:hover { transform: translateY(-4px) rotate(0deg) scale(1.02) !important; }
+  .hero-studio > div > .absolute.-bottom-6 {
+    bottom: 18px !important;
+    right: 50% !important;
+    transform: translateX(50%) !important;
+    white-space: nowrap;
+    font-size: 0.5rem !important;
+  }
+  .hero-studio > div > .absolute.-bottom-10 {
+    bottom: -2px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .creative-marquee-left,
+  .creative-marquee-right { animation: none; }
+  .hero-title-sweep:hover { animation: none; }
+}
+
+
+/* V19 hero polish: restrained float after the three cards land in the hero. */
+@keyframes hero-card-float-1 {
+  0%, 100% { transform: translate3d(0,0,0); }
+  50% { transform: translate3d(0,-7px,0); }
+}
+@keyframes hero-card-float-2 {
+  0%, 100% { transform: translate3d(0,0,0); }
+  50% { transform: translate3d(0,6px,0); }
+}
+@keyframes hero-card-float-3 {
+  0%, 100% { transform: translate3d(0,0,0); }
+  50% { transform: translate3d(0,-5px,0); }
+}
+.hero-entry-1 { animation: hero-card-float-1 4.8s ease-in-out 2.0s infinite; }
+.hero-entry-2 { animation: hero-card-float-2 5.4s ease-in-out 2.15s infinite; }
+.hero-entry-3 { animation: hero-card-float-3 5.1s ease-in-out 2.3s infinite; }
+
+@media (max-width: 639px) {
+  /* More breathing room: three cards form one clean visual row. */
+  .hero-studio {
+    height: 255px !important;
+    margin-top: 0 !important;
+  }
+  .hero-entry-1 { left: 0 !important; right: auto !important; top: 28px !important; bottom: auto !important; width: 31% !important; }
+  .hero-entry-2 { left: 34.5% !important; right: auto !important; top: 42px !important; bottom: auto !important; width: 31% !important; }
+  .hero-entry-3 { left: 69% !important; right: auto !important; top: 28px !important; bottom: auto !important; width: 31% !important; }
+  .hero-design-card { width: 100% !important; }
+  .hero-design-card .relative.h-24,
+  .hero-design-card .sm\:h-32 { height: 78px !important; }
+  .hero-design-card .mt-2 { margin-top: .3rem !important; }
+  .hero-design-card .text-xs { font-size: .49rem !important; }
+  .hero-design-card span { font-size: .39rem !important; }
+  .hero-studio > div > .absolute.-bottom-6 {
+    bottom: -1px !important;
+    right: 50% !important;
+    transform: translateX(50%) !important;
+    font-size: .48rem !important;
+  }
+  .hero-studio > div > .absolute.-bottom-10 {
+    bottom: -58px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    gap: .45rem !important;
+  }
+  .hero-studio > div > .absolute.-bottom-10 .social-glass-icon:nth-child(1) { width: 40px !important; height: 40px !important; }
+  .hero-studio > div > .absolute.-bottom-10 .social-glass-icon:nth-child(2) { width: 46px !important; height: 46px !important; }
+  .hero-studio > div > .absolute.-bottom-10 .social-glass-icon:nth-child(3) { width: 38px !important; height: 38px !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-entry-1, .hero-entry-2, .hero-entry-3 { animation: none; }
+}
+
+
+/* V23 — clean static 3D character with a soft fade into the dark hero. */
+.hero-character-gaze {
+  width: clamp(250px, 28vw, 360px);
+  height: clamp(380px, 42vw, 520px);
+  pointer-events: none;
+  filter: drop-shadow(0 28px 50px rgba(0,0,0,.52));
+}
+
+.hero-character-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  filter: saturate(.92) contrast(1.03);
+  /* Fade the lower body softly into the dark background. */
+  -webkit-mask-image: linear-gradient(to bottom,
+    #000 0%,
+    #000 66%,
+    rgba(0,0,0,.96) 74%,
+    rgba(0,0,0,.72) 82%,
+    rgba(0,0,0,.34) 91%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(to bottom,
+    #000 0%,
+    #000 66%,
+    rgba(0,0,0,.96) 74%,
+    rgba(0,0,0,.72) 82%,
+    rgba(0,0,0,.34) 91%,
+    transparent 100%
+  );
+}
+
+
+@media (max-width: 700px) {
+  .hero-character-gaze {
+    width: 205px;
+    height: 308px;
+    top: 48%;
+    opacity: .98;
+  }
+}
+
+
+/* V24 — mobile hero final: true center alignment and zero overlap. */
+@media (max-width: 639px) {
+  .hero-studio {
+    height: 430px !important;
+    width: 100% !important;
+    max-width: 430px !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+  }
+
+  .hero-studio > div {
+    overflow: visible !important;
+  }
+
+  /* Three portfolio cards stay in a dedicated top row. */
+  .hero-entry-1,
+  .hero-entry-2,
+  .hero-entry-3 {
+    top: 4px !important;
+    bottom: auto !important;
+    width: 29% !important;
+  }
+  .hero-entry-1 { left: 2% !important; right: auto !important; }
+  .hero-entry-2 { left: 35.5% !important; right: auto !important; }
+  .hero-entry-3 { left: 69% !important; right: auto !important; }
+
+  .hero-design-card {
+    padding: 5px !important;
+    border-radius: 12px !important;
+    transform: none !important;
+  }
+  .hero-design-card .relative.h-24,
+  .hero-design-card .sm\:h-32 {
+    height: 72px !important;
+  }
+  .hero-design-card .mt-2 { margin-top: 3px !important; }
+  .hero-design-card .text-xs { font-size: .43rem !important; line-height: 1.05 !important; }
+  .hero-design-card span { font-size: .34rem !important; }
+
+  /* Character occupies its own lower zone; cards can never cover it. */
+  .hero-character-gaze {
+    width: 190px !important;
+    height: 285px !important;
+    top: 63% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 10 !important;
+  }
+
+  .hero-studio > div > .absolute.-bottom-6 {
+    top: 304px !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    white-space: nowrap;
+    font-size: .45rem !important;
+    z-index: 45 !important;
+  }
+
+  .hero-studio > div > .absolute.-bottom-10 {
+    top: 350px !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    gap: .5rem !important;
+    z-index: 45 !important;
+  }
+
+  .hero-studio > div > .absolute.-bottom-10 .social-glass-icon:nth-child(1) { width: 38px !important; height: 38px !important; }
+  .hero-studio > div > .absolute.-bottom-10 .social-glass-icon:nth-child(2) { width: 44px !important; height: 44px !important; }
+  .hero-studio > div > .absolute.-bottom-10 .social-glass-icon:nth-child(3) { width: 38px !important; height: 38px !important; }
+
+  /* Everything below the visual is genuinely centered on mobile. */
+  .hero-bottom-content {
+    width: 100% !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    gap: 16px !important;
+  }
+  .hero-bottom-copy {
+    width: min(92vw, 390px) !important;
+    max-width: 390px !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  .hero-bottom-copy p { text-align: center !important; }
+  .hero-bottom-cta { margin-left: auto !important; margin-right: auto !important; }
+}
+
+/* V26 FINAL — mobile hero: character centered on the top visual layer, cards kept clear, socials truly centered. */
+@media (max-width: 639px) {
+  .hero-studio {
+    height: 500px !important;
+    width: 100% !important;
+    max-width: 390px !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .hero-studio > div {
+    overflow: visible !important;
+    transform: none !important;
+  }
+
+  /* Cards occupy only the upper side zones. */
+  .hero-entry-1,
+  .hero-entry-2,
+  .hero-entry-3 {
+    width: 27% !important;
+    top: 8px !important;
+    bottom: auto !important;
+    z-index: 10 !important;
+  }
+  .hero-entry-1 { left: 0 !important; right: auto !important; }
+  .hero-entry-2 { left: auto !important; right: 0 !important; }
+  .hero-entry-3 { left: auto !important; right: 3% !important; top: 112px !important; }
+
+  .hero-design-card {
+    width: 100% !important;
+    padding: 5px !important;
+    border-radius: 11px !important;
+    transform: none !important;
+  }
+  .hero-design-card .relative.h-24,
+  .hero-design-card .sm\:h-32 {
+    height: 70px !important;
+  }
+  .hero-design-card .mt-2 { margin-top: 3px !important; }
+  .hero-design-card .text-xs { font-size: .42rem !important; line-height: 1.05 !important; }
+  .hero-design-card span { font-size: .34rem !important; }
+
+  /* Character is the hero focal point: centered, larger, and always above the cards. */
+  .hero-character-gaze {
+    width: 220px !important;
+    height: 330px !important;
+    left: 50% !important;
+    top: 51% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 100 !important;
+    pointer-events: none !important;
+  }
+  .hero-character-image {
+    position: absolute !important;
+    z-index: 102 !important;
+  }
+
+  /* Keep the character's visual center clean: cards cannot sit over its face/body. */
+  .hero-entry-1,
+  .hero-entry-2,
+  .hero-entry-3 {
+    isolation: isolate;
+  }
+
+  /* Prompt sits directly beneath the character. */
+  .hero-studio > div > .absolute.-bottom-6 {
+    top: 395px !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    z-index: 120 !important;
+    white-space: nowrap !important;
+  }
+
+  /* Social icons: one mathematically centered row, equal touch targets. */
+  .hero-studio > div > .absolute.-bottom-10 {
+    top: 445px !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    z-index: 130 !important;
+  }
+
+  .hero-studio > div > .absolute.-bottom-10 .social-glass-icon:nth-child(1),
+  .hero-studio > div > .absolute.-bottom-10 .social-glass-icon:nth-child(2),
+  .hero-studio > div > .absolute.-bottom-10 .social-glass-icon:nth-child(3) {
+    width: 44px !important;
+    height: 44px !important;
+    margin: 0 !important;
+    flex: 0 0 44px !important;
+    transform: none !important;
+  }
+
+  .hero-bottom-content {
+    position: relative !important;
+    z-index: 200 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-top: 0 !important;
+  }
+
+  .hero-bottom-copy,
+  .hero-bottom-copy p,
+  .hero-bottom-cta {
+    width: 100% !important;
+    max-width: 360px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+  }
+}
+
+
+/* V27 FINAL MOBILE — hard-lock Hero character and social row to the viewport center. */
+@media (max-width: 639px) {
+  .hero-studio {
+    width: min(100%, 390px) !important;
+    max-width: 390px !important;
+    margin-inline: auto !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .hero-studio > div.relative {
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    transform: none !important;
+  }
+
+  /* Character: CSS-only centering, so Motion's inline transform can never push it sideways. */
+  .hero-character-gaze {
+    position: absolute !important;
+    left: 50% !important;
+    right: auto !important;
+    top: 51% !important;
+    bottom: auto !important;
+    width: 220px !important;
+    height: 330px !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 100 !important;
+    pointer-events: none !important;
+  }
+
+  .hero-character-image {
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 auto !important;
+  }
+
+  /* Explicit social wrapper: 100% width + flex centering, independent of previous absolute rules. */
+  .hero-socials {
+    position: absolute !important;
+    top: 445px !important;
+    bottom: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: 44px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    z-index: 140 !important;
+  }
+
+  .hero-socials .social-glass-icon {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    margin: 0 !important;
+    flex: 0 0 44px !important;
+    transform: none !important;
+  }
+
+  .hero-explore-pill {
+    position: absolute !important;
+    top: 395px !important;
+    bottom: auto !important;
+    left: 50% !important;
+    right: auto !important;
+    margin: 0 !important;
+    transform: translateX(-50%) !important;
+    z-index: 135 !important;
+  }
+}
+
+
+/* V28 FINAL DESKTOP POLISH — restore a clean editorial hero composition on desktop. */
+@media (min-width: 640px) {
+  .hero-studio {
+    height: 410px !important;
+    max-width: 980px !important;
+    margin: 0 auto !important;
+    overflow: visible !important;
+  }
+
+  .hero-studio > div.relative {
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+    transform-style: preserve-3d;
+  }
+
+  /* Keep the character as the central visual anchor. */
+  .hero-character-gaze {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: clamp(260px, 25vw, 340px) !important;
+    height: clamp(390px, 38vw, 500px) !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 25 !important;
+  }
+
+  /* Three cards form a deliberate triangular composition around the character. */
+  .hero-entry-1 {
+    left: 3% !important;
+    right: auto !important;
+    top: 8px !important;
+    bottom: auto !important;
+    width: 230px !important;
+    z-index: 35 !important;
+  }
+  .hero-entry-2 {
+    left: auto !important;
+    right: 3% !important;
+    top: 8px !important;
+    bottom: auto !important;
+    width: 230px !important;
+    z-index: 35 !important;
+  }
+  .hero-entry-3 {
+    left: 8% !important;
+    right: auto !important;
+    top: 190px !important;
+    bottom: auto !important;
+    width: 250px !important;
+    z-index: 35 !important;
+  }
+
+  .hero-design-card {
+    transform: none !important;
+  }
+
+  /* Keep controls below the character, never across its face/body. */
+  .hero-explore-pill {
+    left: 50% !important;
+    right: auto !important;
+    top: 350px !important;
+    bottom: auto !important;
+    transform: translateX(-50%) !important;
+    z-index: 45 !important;
+    white-space: nowrap !important;
+  }
+
+  .hero-socials {
+    left: 50% !important;
+    right: auto !important;
+    top: 397px !important;
+    bottom: auto !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 12px !important;
+    z-index: 46 !important;
+  }
+
+  .hero-socials .social-glass-icon {
+    margin: 0 !important;
+    flex: 0 0 auto !important;
+  }
+
+  .hero-bottom-content {
+    max-width: 1280px !important;
+    margin-top: 4px !important;
+    align-items: flex-end !important;
+  }
+
+  .hero-bottom-copy {
+    max-width: 390px !important;
+  }
+
+  .hero-bottom-cta {
+    margin-left: auto !important;
+  }
+}
+
+/* Keep the desktop hero compact enough for common laptop/desktop viewports. */
+@media (min-width: 1024px) and (max-height: 850px) {
+  .hero-studio { height: 365px !important; }
+  .hero-character-gaze { width: 290px !important; height: 435px !important; }
+  .hero-entry-3 { top: 168px !important; }
+  .hero-explore-pill { top: 308px !important; }
+  .hero-socials { top: 350px !important; }
+}
+
+/* V31 — user-supplied hero character + draggable portfolio cards. */
+.hero-character-bottom-blur {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2%;
+  width: 100%;
+  height: 42%;
+  object-fit: cover;
+  object-position: center bottom;
+  filter: blur(13px) saturate(.9);
+  opacity: .46;
+  transform: scale(1.035);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.08) 12%, rgba(0,0,0,.5) 40%, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.08) 12%, rgba(0,0,0,.5) 40%, #000 72%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-design-card {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hero-entry-1,
+.hero-entry-2,
+.hero-entry-3 {
+  touch-action: none;
+}
+
+@media (max-width: 639px) {
+  .hero-character-bottom-blur {
+    filter: blur(10px) saturate(.88);
+    opacity: .42;
+  }
+
+  .hero-design-card {
+    touch-action: none;
+  }
+}
