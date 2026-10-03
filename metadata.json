@@ -1,0 +1,14 @@
+{
+  "name": "DesignBazzar \u2014 Graphic Designer Portfolio",
+  "description": "Premium graphic designer portfolio landing page for DesignBazzar, showcasing brand identity, digital & web design, print publication, and packaging design.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ],
+  "version": "31",
+  "changes": [
+    "User-supplied hero character image",
+    "Soft lower character blur/fade",
+    "Draggable hero design cards"
+  ]
+}
